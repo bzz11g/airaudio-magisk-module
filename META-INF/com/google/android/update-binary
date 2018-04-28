@@ -12,14 +12,14 @@ $BOOTMODE || ps -A 2>/dev/null | grep zygote | grep -v grep >/dev/null && BOOTMO
 
 # This path should work in any cases
 TMPDIR=/dev/tmp
-MOUNTPATH=/magisk
-IMG=/data/magisk.img
+MOUNTPATH=/sbin/.core/img
+IMG=/data/adb/magisk.img
 if $BOOTMODE; then
-  MOUNTPATH=/dev/magisk_merge
-  IMG=/data/magisk_merge.img
+MOUNTPATH=/dev/magisk_merge
+IMG=/data/adb/magisk_merge.img
 fi
 INSTALLER=$TMPDIR/install
-MAGISKBIN=/data/magisk
+MAGISKBIN=/data/adb/magisk
 
 # Default permissions
 umask 022
@@ -64,7 +64,7 @@ mount /cache 2>/dev/null
 . $MAGISKBIN/util_functions.sh
 get_outfd
 
-$BOOTMODE && ! is_mounted /magisk && abort "! Magisk is not activated!"
+$BOOTMODE && ! is_mounted /sbin/.core/img && abort "! Magisk is not activated!"
 [ ! -f /system/build.prop ] && abort "! /system could not be mounted!"
 
 # Detect version and architecture
